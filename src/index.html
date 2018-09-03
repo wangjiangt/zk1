@@ -10,9 +10,38 @@
     <div class="wrap">
         <div class="nav">
             <input type="text" class="inp" >
-            <button>百度一下</button>
+            <button class="btn">百度一下</button>
+            <ul class="Uli">
+              
+            </ul>
         </div>
     </div>
-    <script src="./js/index.js"></script>
+    <script src="./js/jquery-2.1.1.min.js"></script>
+    <script>
+    $('.inp').on('input', function () {
+        var val = $(this).val();
+        if(!val){
+            $('.Uli').html('');
+        } else {
+            $.ajax({
+                url:'/api/list?' + val, 
+                dataType:'json',
+                success: function (res) { 
+                    var str = '';
+                    res.data.forEach(function (ele)
+                    { str += `
+                     <li>${ele.list}</li>
+                        `; $('.Uli').append(str);
+                    }) },
+                    error: function (error) {
+                         console.warn(error);
+                    } })
+        }
+     
+     })
+
+    
+    
+    </script>
 </body>
 </html>

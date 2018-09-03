@@ -1,1 +1,5 @@
-alert(1)
+
+$('button').on('input', function () {
+
+    alert(12)
+})

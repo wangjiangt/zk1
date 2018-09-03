@@ -17,7 +17,7 @@ gulp.task('server', function () {
         .pipe(server({
             port: 8080,
             middleware: function (req, res, next) { 
-                let pathname = url.parse(req.url).pathname;
+                var pathname = url.parse(req.url).pathname;
 
                 if (pathname === '/favicon.ico'){
                     res.end();
@@ -25,6 +25,14 @@ gulp.task('server', function () {
                 }
 
                 if(pathname === '/api/list'){
+                    var items = url.parse(req.url).query.val;
+                    var map = [];
+                    // data.forEach(data.list.match(function (ele) {
+                    //     if(data.list === ele){
+                    //         map.push(ele);
+                    //     }
+                    // }))
+                    console.log(items);
                     res.end(JSON.stringify({code: 0, msg: "成功", data: data}));
                 } else {
                     pathname = pathname === '/'? '/index.html' : pathname;
